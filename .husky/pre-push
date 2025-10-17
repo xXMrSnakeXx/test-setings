@@ -16,10 +16,10 @@ if echo "$branch_name" | grep -Eq "^(dev|main|master)$"; then
 fi
 
 # Validate branch name format
-if ! echo "$branch_name" | grep -Eq "^(feat|fix|refactor|docs|hotfix|chore)/SHARK-[0-9]+-[a-z0-9-]+$"; then
+if ! echo "$branch_name" | grep -Eq "^(task|fix|bug|imp)/[0-9]+-[a-z0-9-]+$"; then
   echo -e "${RED}❌ Invalid branch name: ${branch_name}${NC}"
-  echo -e "${GREEN}✅ Format: <type>/SHARK-<taskId>-<description>${NC}"
-  echo -e "${GREEN}   Example: feat/SHARK-334-add-liquidity-form${NC}"
+  echo -e "${GREEN}✅ Format: <type>/<taskId>-<description>${NC}"
+  echo -e "${GREEN}   Example: task/334-add-form${NC}"
   exit 1
 fi
 

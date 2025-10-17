@@ -14,10 +14,18 @@ if echo "$branch_name" | grep -Eq "^(dev|main|master)$"; then
 fi
 
 # Checking commit message with commitlint
+# if ! npx --no -- commitlint --edit "$1"; then
+#   echo -e "${RED}❌ Commit message does not follow conventions.${NC}"
+#   echo -e "${GREEN}✅ Format: <type>(SHARK-<taskId>): <short description>${NC}"
+#   echo -e "${GREEN}   Example: feat(SHARK-334): add liquidity form${NC}"
+#   exit 1
+# fi
 if ! npx --no -- commitlint --edit "$1"; then
   echo -e "${RED}❌ Commit message does not follow conventions.${NC}"
-  echo -e "${GREEN}✅ Format: <type>(SHARK-<taskId>): <short description>${NC}"
-  echo -e "${GREEN}   Example: feat(SHARK-334): add liquidity form${NC}"
+  # echo -e "${GREEN}✅ Format: <type>(SHARK-<taskId>): <short description>${NC}"
+  echo -e "${GREEN}✅ Format: <short description>${NC}"
+  # echo -e "${GREEN}   Example: feat(SHARK-334): add liquidity form${NC}"
+  echo -e "${GREEN}   Example:  add form${NC}"
   exit 1
 fi
 
