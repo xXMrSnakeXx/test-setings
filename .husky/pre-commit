@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo -e "${GREEN}🚀 Husky pre-commit hook started${NC}"
+echo -e "${GREEN}🔍 Running lint-staged...${NC}"
+
+npx lint-staged
+
+if [ $? -eq 0 ]; then
+  echo -e "${GREEN}✅ All checks passed. Proceeding with commit.${NC}"
+else
+  echo -e "${RED}❌ Formatting or linting issues found. Commit aborted.${NC}"
+  exit 1
+fi

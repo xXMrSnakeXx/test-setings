@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo -e "${GREEN}🚀 Husky pre-push hook started${NC}"
+
+# Get current branch name
+branch_name=$(git symbolic-ref --short HEAD)
+
+# Allow special branches without validation
+if echo "$branch_name" | grep -Eq "^(dev|main|master)$"; then
+  echo -e "${GREEN}✅ Branch '$branch_name' is allowed without format check.${NC}"
+  exit 0
+fi
+
+# Validate branch name format
+if ! echo "$branch_name" | grep -Eq "^(feat|fix|refactor|docs|hotfix|chore)/SHARK-[0-9]+-[a-z0-9-]+$"; then
+  echo -e "${RED}❌ Invalid branch name: ${branch_name}${NC}"
+  echo -e "${GREEN}✅ Format: <type>/SHARK-<taskId>-<description>${NC}"
+  echo -e "${GREEN}   Example: feat/SHARK-334-add-liquidity-form${NC}"
+  exit 1
+fi
+
+echo -e "${GREEN}✅ Branch name format is valid.${NC}"
